@@ -1,15 +1,16 @@
-package com.example.andreysshop.service;
+package com.example.andreysshop.service.impl;
 
 import com.example.andreysshop.model.entity.Category;
 import com.example.andreysshop.model.entity.CategoryName;
 import com.example.andreysshop.repository.CategoryRepository;
+import com.example.andreysshop.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
