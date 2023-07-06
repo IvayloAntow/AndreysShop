@@ -48,8 +48,6 @@ public class UsersController {
         if(user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())){
             redirectAttributes.addFlashAttribute("notFound" , true);
 
-            //todo redirect att
-
             return "redirect:login";
         }
 
