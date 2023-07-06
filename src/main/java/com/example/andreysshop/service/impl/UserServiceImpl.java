@@ -24,12 +24,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean register(UserServiceModel userServiceModel) {
 
-            Optional<User> userr = userRepository.findByUsername(userServiceModel.getUsername());
-            if (userr.isPresent()){
-                return false;
-            }
+           // Optional<User> userr = userRepository.findByUsername(userServiceModel.getUsername());
+           // if (userr.isPresent()){
+          //      return false;
+          //  }
         userRepository
                 .save(modelMapper.map(userServiceModel , User.class));
             return true;
+    }
+
+    @Override
+    public UserServiceModel findByUsername(String username) {
+        return this.userRepository.
+                findByUsername(username)
+                .map(user -> this.modelMapper.map(user, UserServiceModel.class))
+                .orElse(null);
     }
 }

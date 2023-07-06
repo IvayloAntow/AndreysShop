@@ -6,4 +6,5 @@ public interface UserService {
 
     boolean register(UserServiceModel userServiceModel);
 
+    UserServiceModel findByUsername(String username);
 }
