@@ -2,6 +2,7 @@ package com.example.andreysshop.service.impl;
 
 import com.example.andreysshop.model.entity.Category;
 import com.example.andreysshop.model.entity.CategoryName;
+import com.example.andreysshop.model.service.CategoryServiceModel;
 import com.example.andreysshop.repository.CategoryRepository;
 import com.example.andreysshop.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -32,5 +33,14 @@ public class CategoryServiceImpl implements CategoryService {
                     });
                     }
         }
+
+    @Override
+    public CategoryServiceModel findByCategoryName(CategoryName categoryName) {
+        return this.categoryRepository
+                .findCategoryByCategoryName(categoryName)
+                .map(category -> this.modelMapper
+                        .map(category, CategoryServiceModel.class))
+                .orElse(null);
     }
+}
 

@@ -1,7 +1,10 @@
 package com.example.andreysshop.web;
 
 import com.example.andreysshop.model.binding.ItemAddBindingModel;
+import com.example.andreysshop.model.service.ItemServiceModel;
+import com.example.andreysshop.service.ItemService;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/items")
 public class ItemsController {
+
+    private final ItemService itemService;
+    private final ModelMapper modelMapper;
+
+    public ItemsController(ItemService itemService, ModelMapper modelMapper) {
+        this.itemService = itemService;
+        this.modelMapper = modelMapper;
+    }
 
     @GetMapping("/add")
     public String add(){
@@ -27,7 +38,9 @@ public class ItemsController {
         if(bindingResult.hasErrors()){
             return "redirect:add";
         }
-        //todo save in DB
+        this.itemService
+                .addItem(this.modelMapper
+                        .map(itemAddBindingModel, ItemServiceModel.class));
 
         return "redirect:/";
 
